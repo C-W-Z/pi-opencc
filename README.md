@@ -21,7 +21,10 @@ pi-opencc 是一個 [Pi](https://pi.dev) 套件，用來在輸入框中轉換繁
 
 ## 安裝
 
-需要 Node.js 22.19.0 以上，pi v1.1.0 以上，互動 TUI 設為 **Fullscreen**。
+需要：
+- Node.js 22.19.0 以上
+- pi v1.2.0 以上 (v1.2.0 以下的版本不保證兼容)
+- 互動 TUI 設為 **Fullscreen**
 
 ```sh
 pi install npm:pi-opencc
