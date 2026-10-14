@@ -1,5 +1,14 @@
 # 待辦
 
+## 待驗收
+
+- [ ] 在 Fullscreen 終端以新建測試 session 手動確認中文 IME、首次 Enter 不送出、第二次原生送出及 steering。
+- [ ] 手動確認 undo、大段貼上、Markdown 引用、命令 autocomplete、換行，以及視窗 resize、主題、focus 和 Fullscreen 模式切換。
+
+真實模型送出可能產生費用並依 pi 原生行為記錄測試對話；未完成手動情境前，不宣稱完整驗收完成。
+
+## 功能待辦
+
 - [ ] 原文送出快捷鍵，例如 Ctrl+Enter；處理 terminal protocol 支援差異。
 - [ ] 快捷鍵在輸入框切換原文／簡體預覽，保留原始草稿。
 - [ ] 模型回覆與可見 thinking 的串流繁體顯示，保留模型原文及上下文。
