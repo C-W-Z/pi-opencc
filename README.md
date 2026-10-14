@@ -1,21 +1,39 @@
 # pi-opencc
 
-> 先把输入框里的繁體中文草稿轉成簡體，確認後再送出。文字仍由你掌握，Enter 才交給 pi。
+[Pi 套件頁](https://pi.dev/packages/pi-opencc) · [GitHub](https://github.com/C-W-Z/pi-opencc) · [npm](https://www.npmjs.com/package/pi-opencc)
 
-## 快速開始
+## 這是什麼
 
-需要 Node.js 22.19.0 以上，以及已安裝的 pi。
+pi-opencc 是一個 [Pi](https://pi.dev) 套件，用來在輸入框中轉換繁體中文為簡體中文。
 
-在專案目錄執行：
+## 為什麼需要這個套件
+
+因為目前 LLM 使用的 tokenizers，對簡體中文的分詞效率比繁體中文更高，換句話說，使用簡體中文更省 token。
+
+### 為什麼不轉成英文
+
+轉成英文會有以下主要問題：
+1. 難以保證語意相同
+2. 需要本地安裝翻譯模型
+3. 翻譯速度比繁轉簡慢
+
+我認為承受這些問題僅僅只是為了省 token 是完全沒必要的。如果你真的想要轉換成英文，可以使用其他人實作的 package，例如 [@pmlpm/pi-translate-zh-en](https://github.com/pmlpl/cn-en-bridge)
+
+## 安裝
+
+需要 Node.js 22.19.0 以上，pi v1.1.0 以上，互動 TUI 設為 **Fullscreen**。
 
 ```sh
-npm ci
-pi -e ./
+pi install npm:pi-opencc
 ```
 
-這會在這次 pi 啟動時載入套件，不會修改 pi 設定。使用前請確認互動 TUI 設為 **Fullscreen**。離開 pi 後，不再用 `-e ./` 啟動即可回到原本操作。
+移除套件：
 
-## 怎麼使用
+```bash
+pi remove npm:pi-opencc
+```
+
+## 如何使用
 
 1. 在輸入框撰寫訊息，按第一次 Enter。
 2. pi-opencc 會在原輸入框把文字轉成簡體，**不會送出**。
