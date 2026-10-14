@@ -68,7 +68,7 @@ pi remove npm:pi-opencc
 - autocomplete 開啟時，Enter 先交給 pi 確認選項；Shift+Enter 與一般換行也維持原樣。
 - 其他送出快捷鍵（例如 follow-up）不受兩階段保護，可能直接送出尚未轉換的草稿。
 - 不會轉換附件內容；附件仍由 pi 原生處理。
-- 本套件需要自己的 custom editor，不能與其他提供 custom editor 的 extension 一起使用。若啟動時已偵測到衝突，本功能會停用並提示。
+- 本套件無法與其他提供 custom editor 的 extension 一起使用。若啟動時已偵測到衝突，本功能會停用並提示。
 
 ## 開發與測試
 
