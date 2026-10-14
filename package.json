@@ -3,13 +3,38 @@
   "version": "0.1.0",
   "description": "pi Fullscreen 輸入框的繁簡轉換與兩階段送出",
   "type": "module",
-  "engines": { "node": ">=22.19.0" },
-  "keywords": ["pi-package", "opencc"],
-  "files": ["src", "README.md", "TODO.md"],
-  "pi": { "extensions": ["./src/index.ts"] },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/C-W-Z/pi-opencc.git"
+  },
+  "homepage": "https://pi.dev/packages/pi-opencc",
+  "bugs": {
+    "url": "https://github.com/C-W-Z/pi-opencc/issues"
+  },
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "keywords": [
+    "pi-package",
+    "pi-extension",
+    "opencc"
+  ],
+  "files": [
+    "src/**/*.ts",
+    "README.md",
+    "TODO.md",
+    "LICENSE"
+  ],
+  "pi": {
+    "extensions": [
+      "./src/index.ts"
+    ]
+  },
   "scripts": {
     "check": "tsc --noEmit",
-    "test": "node --import tsx --test test/*.test.ts"
+    "test": "node --import tsx --test test/*.test.ts",
+    "verify": "npm run check && npm test"
   },
   "dependencies": {
     "mdast-util-from-markdown": "^2.1.0",
