@@ -5,6 +5,10 @@ const convert = Converter({ from: "twp", to: "cn" });
 type Range = [start: number, end: number];
 type Node = ReturnType<typeof fromMarkdown> | ReturnType<typeof fromMarkdown>["children"][number];
 
+// 對齊 pi autocomplete 的分隔規則：CJK 文字屬於路徑，CJK 標點才分隔一般文字。
+const referenceSeparator = /(?:\s|(?=\p{Punctuation})[\p{Script_Extensions=Han}\p{Script_Extensions=Hiragana}\p{Script_Extensions=Katakana}\p{Script_Extensions=Hangul}\p{Script_Extensions=Bopomofo}]|[，．：；！？（）［］｛｝“”‘’…—])/u;
+const referenceStart = /[\s"'=([{<`]/;
+
 /** 合併 source offsets，保留原始 Markdown，不經過重新序列化。 */
 function mergeRanges(ranges: Range[]): Range[] {
   const merged: Range[] = [];
@@ -69,7 +73,18 @@ function protectedRanges(source: string): Range[] {
       continue;
     }
     if (escaped(i)) continue;
-    if (source[i] === "`") {
+    if (source[i] === "@" && (i === 0 || referenceStart.test(source[i - 1]) || referenceSeparator.test(source[i - 1]))) {
+      let end = i + 1;
+      if (source[end] === '"') {
+        // pi 使用雙引號包住含空白路徑，不解碼或重新跳脫；未閉合時保護到結尾。
+        const closing = source.indexOf('"', end + 1);
+        end = closing === -1 ? source.length : closing + 1;
+      } else {
+        while (end < source.length && !referenceSeparator.test(source[end]) && source[end] !== '"') end++;
+      }
+      add(i, end);
+      i = end - 1;
+    } else if (source[i] === "`") {
       const run = /^`+/.exec(source.slice(i))![0];
       let end = source.length;
       for (const match of source.slice(i + run.length).matchAll(/`+/g)) {

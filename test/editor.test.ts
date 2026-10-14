@@ -1,7 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { setTimeout } from "node:timers/promises";
-import { CURSOR_MARKER, visibleWidth } from "@earendil-works/pi-tui";
+import { CombinedAutocompleteProvider, CURSOR_MARKER, visibleWidth } from "@earendil-works/pi-tui";
 import { harness } from "./helpers.ts";
 
 const enter = "\r";
@@ -25,7 +28,7 @@ test("第一次 Enter 留在原輸入框，第二次走原生 submit，下一則
   assert.equal(h.submitted.length, 1);
 });
 
-for (const text of ["English", "简体中文", "123", "`繁體`", "English 與軟體"]) {
+for (const text of ["English", "简体中文", "123", "`繁體`", "English 與軟體", "@測試檔案.ts", '@"資料夾/測試 檔案.ts"']) {
   test(`非空草稿固定兩次 Enter：${text}`, () => {
     const h = harness();
     h.editor.setText(text);
@@ -246,6 +249,88 @@ test("原生 autocomplete 確認不算第一次 Enter", async () => {
   h.editor.handleInput(enter);
   assert.equal(h.editor.getText(), "`繁體.md` 与软件");
   assert.deepEqual(h.submitted, []);
+});
+
+for (const reference of ["@測試檔案.ts", '@"資料夾/測試 檔案.ts"', '@"資料，夾/測試檔案.ts"']) {
+  test(`原生 autocomplete 插入的引用保留原路徑、undo 與兩階段送出：${reference}`, async () => {
+    const h = harness();
+    const provider = new CombinedAutocompleteProvider([], ".");
+    h.editor.setAutocompleteProvider({
+      triggerCharacters: ["@"],
+      // 固定候選，避免依賴 fd 與使用者檔案；插入引用仍走 pi 原生 applyCompletion。
+      getSuggestions: async () => ({ items: [{ label: "測試檔案.ts", value: reference }], prefix: "@" }),
+      applyCompletion: provider.applyCompletion.bind(provider),
+    });
+    h.editor.setText("說明 ");
+    h.editor.handleInput("@");
+    for (let i = 0; i < 20 && !h.editor.isShowingAutocomplete(); i++) await setTimeout(20);
+    assert.equal(h.editor.isShowingAutocomplete(), true);
+    h.editor.handleInput(enter);
+    assert.equal(h.editor.getExpandedText(), `說明 ${reference} `);
+    assert.match(h.label(), /Enter 轉簡體/);
+    assert.deepEqual(h.submitted, []);
+
+    h.editor.handleInput("與軟體");
+    const original = `說明 ${reference} 與軟體`;
+    const converted = `说明 ${reference} 与软件`;
+    h.editor.handleInput(enter);
+    assert.equal(h.editor.getExpandedText(), converted);
+    assert.match(h.label(), /Enter 送出/);
+    assert.deepEqual(h.submitted, []);
+    h.editor.handleInput(undo);
+    assert.equal(h.editor.getExpandedText(), original);
+    assert.match(h.label(), /Enter 轉簡體/);
+    h.editor.handleInput(enter);
+    h.editor.handleInput(enter);
+    assert.deepEqual(h.submitted, [converted]);
+  });
+}
+
+test("pi 原生路徑候選的中文與含空白檔名在轉換送出後仍指向測試檔案", async (t) => {
+  const directory = await mkdtemp(join(tmpdir(), "pi-opencc-references-"));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const names = ["測試檔案.ts", "測試 檔案.ts", "測試，檔案.ts"];
+  for (const name of names) await writeFile(join(directory, name), "測試內容", "utf8");
+
+  const provider = new CombinedAutocompleteProvider([], directory);
+  // 路徑候選與 @ 搜尋共用 pi 的引用格式產生器；走路徑候選避免依賴 fd。
+  const prefix = "./測試";
+  const suggestions = await provider.getSuggestions([prefix], 0, prefix.length, {
+    force: true,
+    signal: new AbortController().signal,
+  });
+  assert.equal(suggestions?.items.length, names.length);
+  for (const item of suggestions!.items) {
+    const expectedPath = `./${item.label}`;
+    const expectedValue = /[\s，]/u.test(item.label) ? `"${expectedPath}"` : expectedPath;
+    assert.equal(item.value, expectedValue);
+    const reference = `@${item.value}`;
+    const completion = provider.applyCompletion(["說明 @測"], 0, "說明 @測".length, {
+      ...item, value: reference,
+    }, "@測");
+    const h = harness();
+    h.editor.setText(completion.lines.join("\n") + "與軟體");
+    h.editor.handleInput(enter);
+    h.editor.handleInput(enter);
+    assert.deepEqual(h.submitted, [`说明 ${reference} 与软件`]);
+    const submittedReference = h.submitted[0].slice("说明 @".length, -" 与软件".length);
+    const submittedPath = submittedReference.startsWith('"') ? submittedReference.slice(1, -1) : submittedReference;
+    assert.equal(submittedPath, expectedPath);
+    assert.equal(await readFile(join(directory, submittedPath), "utf8"), "測試內容");
+  }
+});
+
+test("大段貼上的檔案引用在展開、轉換與送出後保持原路徑", () => {
+  const h = harness();
+  const original = Array(25).fill('說明 @測試檔案.ts 與 @"資料夾/測試 檔案.ts" 軟體').join("\n");
+  const converted = original.replaceAll("說明", "说明").replaceAll("與", "与").replaceAll("軟體", "软件");
+  h.editor.handleInput(paste(original));
+  assert.match(h.editor.getText(), /\[paste #/);
+  h.editor.handleInput(enter);
+  assert.equal(h.editor.getExpandedText(), converted);
+  assert.deepEqual(h.submitted, []);
+  h.editor.handleInput(enter);
+  assert.deepEqual(h.submitted, [converted]);
 });
 
 test("其他送出鍵沿用原生 action handler，送出後清除確認", () => {
