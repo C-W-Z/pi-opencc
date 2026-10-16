@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "D:\\Pi\\pi-opencc\\.archify\\architecture-project-plan-20261016-165016\\candidate.json",
+    "sha256": "7dfd851df567303273d6e3bcc77584f50848a9702fe1d97ddf529e3da82b8e2a",
+    "bytes": 11635
+  },
+  "artifact": {
+    "path": "D:\\Pi\\pi-opencc\\.archify\\architecture-project-plan-20261016-165016\\project-plan.html",
+    "sha256": "62939b63cf5e01c5a9749e9e84eea7b641558b9f03586b43b88086e2b52813da",
+    "bytes": 831126
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "D:\\Pi\\pi-opencc\\.archify\\architecture-project-plan-20261016-165016\\project-plan.finalize.json",
+    "summaryReceipt": "D:\\Pi\\pi-opencc\\.archify\\architecture-project-plan-20261016-165016\\project-plan.finalize-summary.json",
+    "browserCheckReceipt": "D:\\Pi\\pi-opencc\\.archify\\architecture-project-plan-20261016-165016\\project-plan.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.1.0",
+    "availableVersion": "3.1.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-16T08:26:30.663Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 2968
+}

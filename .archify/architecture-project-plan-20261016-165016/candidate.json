@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "pi-opencc｜需求導向目標架構",
+    "locale": "zh-TW",
+    "output": ".archify/architecture-project-plan-20261016-165016/project-plan.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/C-W-Z/pi-opencc",
+      "revision": "0498ae72c5ea869495c2ded923e6aff1ab533eea",
+      "link_mode": "local-only"
+    }
+  },
+  "components": [
+    {
+      "id": "writer",
+      "type": "external",
+      "icon": "person",
+      "label": "使用者",
+      "sublabel": "撰寫、檢查與閱讀",
+      "tag": "互動入口",
+      "pos": [40, 40],
+      "size": [180, 76],
+      "sources": [{"path": "README.md", "line": 39, "end_line": 53}]
+    },
+    {
+      "id": "interaction-adapter",
+      "type": "frontend",
+      "label": "模式與輸入整合層",
+      "sublabel": "模式閘門、按鍵與原生委派",
+      "tag": "Fullscreen 既有／擴充規劃",
+      "pos": [340, 40],
+      "size": [230, 76],
+      "sources": [
+        {"path": "README.md", "line": 24, "end_line": 27},
+        {"path": "README.md", "line": 72, "end_line": 78},
+        {"path": "TODO.md", "line": 13, "end_line": 18}
+      ]
+    },
+    {
+      "id": "draft-controller",
+      "type": "backend",
+      "label": "草稿狀態控制器",
+      "sublabel": "首次轉換、確認後原樣送出",
+      "tag": "兩階段既有／預覽規劃",
+      "pos": [680, 40],
+      "size": [230, 76],
+      "sources": [
+        {"path": "README.md", "line": 39, "end_line": 53},
+        {"path": "README.md", "line": 70, "end_line": 70},
+        {"path": "TODO.md", "line": 13, "end_line": 14}
+      ]
+    },
+    {
+      "id": "text-core",
+      "type": "backend",
+      "label": "安全文字轉換核心",
+      "sublabel": "保護片段 → OpenCC → 還原",
+      "tag": "輸入既有／共用分層建議",
+      "pos": [1010, 40],
+      "size": [230, 76],
+      "sources": [
+        {"path": "README.md", "line": 47, "end_line": 47},
+        {"path": "README.md", "line": 55, "end_line": 70},
+        {"path": "TODO.md", "line": 15, "end_line": 19}
+      ]
+    },
+    {
+      "id": "pi-host",
+      "type": "external",
+      "label": "Pi 原生執行層",
+      "sublabel": "送出、命令、附件與模型互動",
+      "tag": "平台責任／不另造送出通道",
+      "pos": [340, 300],
+      "size": [230, 76],
+      "sources": [
+        {"path": "README.md", "line": 41, "end_line": 45},
+        {"path": "README.md", "line": 66, "end_line": 78},
+        {"path": "TODO.md", "line": 5, "end_line": 9}
+      ]
+    },
+    {
+      "id": "canonical-content",
+      "type": "backend",
+      "label": "Pi 原文訊息與上下文",
+      "sublabel": "模型回覆、可見 thinking 原文",
+      "tag": "規劃約束／由 Pi 持有",
+      "pos": [680, 300],
+      "size": [230, 76],
+      "sources": [{"path": "TODO.md", "line": 15, "end_line": 16}]
+    },
+    {
+      "id": "response-presenter",
+      "type": "backend",
+      "label": "串流顯示投影層",
+      "sublabel": "緩衝、安全分段與呈現快取",
+      "tag": "待實作／不回寫上下文",
+      "pos": [1010, 300],
+      "size": [230, 76],
+      "sources": [{"path": "TODO.md", "line": 15, "end_line": 16}]
+    },
+    {
+      "id": "response-view",
+      "type": "frontend",
+      "label": "回覆與 thinking 檢視",
+      "sublabel": "整段切換原文／繁體",
+      "tag": "待實作／僅轉換可見內容",
+      "pos": [1010, 560],
+      "size": [230, 76],
+      "sources": [{"path": "TODO.md", "line": 15, "end_line": 18}]
+    }
+  ],
+  "connections": [
+    {"id": "compose", "from": "writer", "to": "interaction-adapter", "label": "編輯", "variant": "emphasis"},
+    {"id": "eligible-draft", "from": "interaction-adapter", "to": "draft-controller", "label": "一般草稿", "variant": "emphasis"},
+    {"id": "preview-conversion", "from": "draft-controller", "to": "text-core", "label": "轉換並預覽", "variant": "emphasis"},
+    {"id": "native-delegation", "from": "interaction-adapter", "to": "pi-host", "label": "原生操作"},
+    {"id": "confirmed-submit", "from": "draft-controller", "to": "pi-host", "label": "確認後送出", "variant": "emphasis"},
+    {"id": "raw-response", "from": "pi-host", "to": "canonical-content", "label": "原文事件"},
+    {"id": "display-only-copy", "from": "canonical-content", "to": "response-presenter", "label": "顯示副本"},
+    {"id": "shared-converter", "from": "response-presenter", "to": "text-core", "label": "繁體轉換"},
+    {"id": "render-projection", "from": "response-presenter", "to": "response-view", "label": "顯示投影"}
+  ],
+  "cards": [
+    {
+      "dot": "slate",
+      "title": "閱讀方式與證據範圍",
+      "items": [
+        "只依 README.md 與 TODO.md 規劃；未讀取專案程式碼，也未核對 Pi API。節點代表建議的責任邊界，不代表現有檔案、class 或真實呼叫鏈。",
+        "「既有」僅指 README 描述已具備的行為；「待實作／規劃」來自 TODO。安全分段、緩衝與共用核心是架構建議，不是已完成的功能。",
+        "上排是輸入控制路徑；中排是 Pi 持有原文、再交給顯示投影的路徑。下方檢視與串流投影尚待實作，箭頭不表示這些能力目前已接通。",
+        "轉換核心是本地純文字處理，不新增翻譯模型、雲端服務或獨立資料庫。Pi 的模型連線、session 與附件仍由 Pi 負責。"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "整合層｜能力偵測與原生行為",
+      "items": [
+        "目前條件：Node.js ≥ 22.19.0、Pi ≥ 1.2.0、互動 Fullscreen。已偵測到其他 custom editor 時停用並提示；一般 TUI、print、JSON 與 RPC 目前不啟用。",
+        "只把符合條件的一般草稿交給狀態控制器。/ 命令、!／!!、autocomplete 確認、Shift+Enter 與換行維持原生操作；附件內容不轉換。",
+        "建議將各模式封裝成 adapter，核心不依賴終端。一般 TUI 與 RPC 分別確認能力後接入，不假設它們具備相同 editor 或預覽介面。print／JSON 未列入擴充承諾。",
+        "待實作：由單一設定入口提供快捷鍵與風格；原文送出快捷鍵先做 terminal protocol 能力偵測，Ctrl+Enter 只是候選，不保證所有終端可用。"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "草稿控制｜兩階段與原文保留",
+      "items": [
+        "現有契約：非空草稿第一次 Enter 只轉換並進入確認；內容未變也要確認，但不增加多餘 undo。空白草稿不送出；邊框提示 Enter 的當前作用。",
+        "確認階段允許繼續修改；第二次 Enter 原樣委派 Pi 送出，不再轉換。轉換失敗時保留草稿並阻止送出。",
+        "沿用 Pi 原生 undo：修改與轉換各自可還原。確實發生轉換後，若草稿完整恢復原稿，下次 Enter 重新轉換。",
+        "建議狀態資料：原稿快照、目前文字、轉換預覽與階段；狀態更新與 undo 橋接集中管理，不讓 UI 和轉換核心各自猜測是否可送出。",
+        "待實作：原文／簡體預覽切換保留原稿，與原文送出指令共用同一狀態控制器；切換後編輯如何合併或重算，實作前需明確定義，避免覆蓋使用者修改。",
+        "現有限制：follow-up 等其他送出快捷鍵不受兩階段保護。不能把圖中的確認閘門解讀為所有 Pi 送出途徑都已被攔截。"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "共用核心｜保護範圍與轉換策略",
+      "items": [
+        "建議契約：輸入文字、方向、風格與詞庫，輸出轉換文字、是否變動或錯誤；不讀寫 editor、不送出訊息、不檢查引用檔案，也不更動 session。",
+        "以保護片段辨識 → 可轉換片段處理 → 原位還原分層。既有輸入使用 OpenCC 台灣用詞轉大陸用詞；回覆的繁體風格另外設定，不假設能無損逆轉。",
+        "既有保護：code、Markdown 連結目標、圖片引用、URL、HTML 與 @檔案路徑；一般連結顯示文字仍轉換。保護是盡量保留，不宣稱完整解析所有語法。",
+        "@引用沿用 Pi 雙引號語法；未加引號以空白或 CJK 標點分隔，未閉合引號保守保留到結尾，email 不視為引用。裸路徑仍可能被轉換；inline code 可保護文字，但不保證仍可附加檔案。",
+        "待實作：自訂詞庫、固定技術詞與可設定風格。建議優先序為語法／引用保護 → 固定詞保護 → 自訂詞替換 → OpenCC；這個優先序是提案，需用衝突案例驗證。"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "回覆顯示｜串流與模型上下文隔離",
+      "items": [
+        "待實作：只讀取 Pi 已提供的回覆與可見 thinking 原文，建立顯示用投影；不取得隱藏 thinking，不把繁體投影回寫模型訊息、上下文或原文記錄。",
+        "建議採分段緩衝，不逐 token 盲目轉換：跨 chunk 的詞組、code fence、URL 與 Markdown 可能尚未閉合，未確定的尾段先保留，完成後再統一處理。",
+        "原文與繁體投影分開管理，整段切換只改檢視選擇，不觸發重新向模型請求。顯示轉換失敗建議退回原文，不中斷 Pi 原生串流。",
+        "實作前先驗證 Pi 是否提供不改原始訊息的串流呈現擴充點，以及與其他 renderer 的相容性；若能力不足，另議可行介面，不能用改寫模型上下文替代。"
+      ]
+    },
+    {
+      "dot": "orange",
+      "title": "建議實作順序與完成條件",
+      "items": [
+        "① 既有輸入先完成 TODO 的 Fullscreen 人工驗收，將兩次 Enter、undo、引用保護與原生委派契約固定為回歸案例；此圖不表示已通過。",
+        "② 落實狀態／adapter／純轉換核心的責任邊界，加入原文送出、雙預覽、快捷鍵與風格設定；驗收必須證明不丟失原稿、不覆蓋編輯、失敗不誤送。",
+        "③ 接入自訂詞庫與固定詞策略，以引用、code、技術詞及詞庫衝突案例驗證；設定只由外部注入核心，避免 UI 和轉換器各自保存一份規則。",
+        "④ 在 Pi 呈現能力驗證後實作串流繁體與整段切換；驗收須比較所有 chunk 分割與整段轉換結果，並證明模型原文與上下文保持不變。",
+        "⑤ 一般 TUI 與 RPC 各自通過能力與行為測試後才啟用；RPC 的互動確認方式需先定義，不把 Fullscreen 的兩次 Enter 直接照搬為協定。"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "尚未完成的驗收與風險",
+      "items": [
+        "TODO 尚待人工驗證：中文 IME、首次 Enter 不送出、第二次原生送出與 steering；undo、大段貼上、Markdown、autocomplete、換行、resize、主題、focus 與 Fullscreen 切換。",
+        "中文檔名、含空白路徑及 autocomplete 插入的 @引用，需在轉換後與送出後確認仍能正常使用；文字未變不等於 Pi 的後續引用處理一定成功。",
+        "建議自動測試使用模擬 Pi 事件，不呼叫真實模型；終端快捷鍵和串流擴充點仍需實際環境驗證，不用模擬結果代替相容性證明。",
+        "真實模型驗收可能產生費用並記錄測試對話，必須先取得執行同意。未完成 TODO 人工情境前，不宣稱完整驗收完成。"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "129e49d2-4e05-49b1-88cb-51a495719055",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "D:\\Pi\\pi-opencc\\.archify\\architecture-project-plan-20261016-165016\\candidate.json",
+  "output": "D:\\Pi\\pi-opencc\\.archify\\architecture-project-plan-20261016-165016\\project-plan.html",
+  "specification": {
+    "sha256": "7dfd851df567303273d6e3bcc77584f50848a9702fe1d97ddf529e3da82b8e2a",
+    "bytes": 11635
+  },
+  "artifact": {
+    "sha256": "62939b63cf5e01c5a9749e9e84eea7b641558b9f03586b43b88086e2b52813da",
+    "bytes": 831126
+  }
+}
