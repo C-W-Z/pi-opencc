@@ -1,0 +1,348 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "pi-opencc｜沿著一次對話理解專案架構",
+    "locale": "zh-TW",
+    "output": ".archify/architecture-conversation-map-20261016-172130/conversation-architecture.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/C-W-Z/pi-opencc",
+      "revision": "2d68627c1597cd71398f8d9d286929ee06af5df7",
+      "link_mode": "local-only"
+    }
+  },
+  "components": [
+    {
+      "id": "user-compose",
+      "type": "external",
+      "icon": "person",
+      "label": "User 撰寫｜T1",
+      "sublabel": "一般文字草稿",
+      "tag": "T1｜輸入起點",
+      "pos": [
+        40,
+        80
+      ],
+      "size": [
+        150,
+        84
+      ],
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 39,
+          "end_line": 43
+        }
+      ]
+    },
+    {
+      "id": "input-adapter",
+      "type": "frontend",
+      "label": "輸入整合層｜T0–T3",
+      "sublabel": "既有：模式閘門與原生操作委派",
+      "tag": "T0–T3｜接住操作",
+      "pos": [
+        270,
+        80
+      ],
+      "size": [
+        220,
+        84
+      ],
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 24,
+          "end_line": 27
+        },
+        {
+          "path": "README.md",
+          "line": 74,
+          "end_line": 78
+        },
+        {
+          "path": "TODO.md",
+          "line": 17,
+          "end_line": 18
+        }
+      ]
+    },
+    {
+      "id": "draft-controller",
+      "type": "backend",
+      "label": "草稿控制器｜T1–T4",
+      "sublabel": "既有：首次預覽、再次確認送出",
+      "tag": "T1–T4｜掌管草稿與送出閘門",
+      "pos": [
+        640,
+        80
+      ],
+      "size": [
+        240,
+        84
+      ],
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 39,
+          "end_line": 53
+        },
+        {
+          "path": "README.md",
+          "line": 70,
+          "end_line": 70
+        },
+        {
+          "path": "TODO.md",
+          "line": 13,
+          "end_line": 23
+        }
+      ]
+    },
+    {
+      "id": "pi-execution",
+      "type": "external",
+      "label": "Pi 原生執行｜T4–T6",
+      "sublabel": "模型互動、引用與附件由 Pi 負責",
+      "tag": "T4–T6｜送出與模型互動",
+      "pos": [
+        1060,
+        80
+      ],
+      "size": [
+        240,
+        84
+      ],
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 41,
+          "end_line": 43
+        },
+        {
+          "path": "README.md",
+          "line": 66,
+          "end_line": 78
+        },
+        {
+          "path": "TODO.md",
+          "line": 9,
+          "end_line": 15
+        }
+      ]
+    },
+    {
+      "id": "shared-text-core",
+      "type": "backend",
+      "label": "共用轉換核心｜T2・T7–T8",
+      "sublabel": "輸入已具備；輸出共用為規劃",
+      "tag": "T2 轉簡體｜T7–T8 轉繁體",
+      "pos": [
+        640,
+        310
+      ],
+      "size": [
+        240,
+        84
+      ],
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 47,
+          "end_line": 47
+        },
+        {
+          "path": "README.md",
+          "line": 55,
+          "end_line": 70
+        },
+        {
+          "path": "TODO.md",
+          "line": 15,
+          "end_line": 19
+        }
+      ]
+    },
+    {
+      "id": "pi-original-content",
+      "type": "external",
+      "label": "Pi 原文／上下文｜T6–T8",
+      "sublabel": "Pi 持有；顯示轉換不得回寫",
+      "tag": "T6–T8｜唯一原文來源",
+      "pos": [
+        1060,
+        540
+      ],
+      "size": [
+        240,
+        84
+      ],
+      "sources": [
+        {
+          "path": "TODO.md",
+          "line": 15,
+          "end_line": 16
+        }
+      ]
+    },
+    {
+      "id": "response-projection",
+      "type": "frontend",
+      "label": "回覆顯示投影｜T7–T9",
+      "sublabel": "待實作：串流繁體與整段切換",
+      "tag": "T7–T9｜只改畫面、不改原文",
+      "pos": [
+        640,
+        540
+      ],
+      "size": [
+        240,
+        84
+      ],
+      "sources": [
+        {
+          "path": "TODO.md",
+          "line": 15,
+          "end_line": 16
+        }
+      ]
+    },
+    {
+      "id": "user-read",
+      "type": "external",
+      "icon": "person",
+      "label": "User 閱讀｜T9",
+      "sublabel": "繁體顯示與切換仍待實作",
+      "tag": "T9｜回覆終點",
+      "pos": [
+        270,
+        540
+      ],
+      "size": [
+        220,
+        84
+      ],
+      "sources": [
+        {
+          "path": "TODO.md",
+          "line": 15,
+          "end_line": 16
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "compose-draft",
+      "from": "user-compose",
+      "to": "input-adapter",
+      "label": "輸入",
+      "variant": "emphasis"
+    },
+    {
+      "id": "normal-draft",
+      "from": "input-adapter",
+      "to": "draft-controller",
+      "label": "一般草稿",
+      "variant": "emphasis"
+    },
+    {
+      "id": "confirmed-native-submit",
+      "from": "draft-controller",
+      "to": "pi-execution",
+      "label": "T4：確認後送出",
+      "variant": "emphasis"
+    },
+    {
+      "id": "native-command-path",
+      "from": "input-adapter",
+      "to": "pi-execution",
+      "label": "命令等走原生",
+      "fromSide": "top",
+      "toSide": "top"
+    },
+    {
+      "id": "input-core-dependency",
+      "from": "draft-controller",
+      "to": "shared-text-core",
+      "label": "T2：呼叫轉簡體"
+    },
+    {
+      "id": "model-original-stream",
+      "from": "pi-execution",
+      "to": "pi-original-content",
+      "label": "T6：模型原文",
+      "variant": "emphasis"
+    },
+    {
+      "id": "read-only-original",
+      "from": "pi-original-content",
+      "to": "response-projection",
+      "label": "只讀副本（規劃）",
+      "variant": "emphasis"
+    },
+    {
+      "id": "output-core-dependency",
+      "from": "response-projection",
+      "to": "shared-text-core",
+      "label": "T7–T8：呼叫轉繁體"
+    },
+    {
+      "id": "visible-response",
+      "from": "response-projection",
+      "to": "user-read",
+      "label": "T9：顯示與切換",
+      "variant": "emphasis"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "先讀主線，再看共用核心",
+      "items": [
+        "沿主線繞一個 U：上排由左向右是輸入與送出，右側往下是模型回覆，下排由右向左是原文的顯示投影與閱讀。上下兩個 User 是同一位使用者在不同階段的角色。",
+        "中間的轉換核心不是另一個時間階段，而是輸入、回覆兩端共用的純文字能力。兩條指向核心的線代表呼叫依賴；核心回傳文字，由呼叫端套用，不自行送出或修改畫面。",
+        "T0–T9 對應對話時序圖：T0 啟用、T1 輸入、T2 轉簡、T3 檢查、T4 確認送出、T5 Pi 請求模型、T6 原文串流、T7 分批呈現、T8 完成、T9 閱讀切換。"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "輸入端｜誰決定轉換、誰決定送出",
+      "items": [
+        "輸入整合層只負責能力偵測、按鍵與 editor 橋接：目前限互動 Fullscreen，已偵測 custom editor 衝突則停用。/ 命令與 !／!! 交回 Pi；autocomplete 確認、Shift+Enter、換行維持原生，不進入一般草稿的轉換流程。",
+        "草稿控制器持有原稿、當前文字與轉換／確認階段：非空草稿首次 Enter 才呼叫轉簡體，再把結果原位預覽；第二次 Enter 原樣委派 Pi，不再轉換。空白不送出、轉換失敗保留草稿且不送出；確認階段可繼續修改。",
+        "待實作歸屬：原文送出快捷鍵與原文／簡體預覽由草稿控制器處理；可設定按鍵與 terminal protocol 支援交給整合層。原文指令使用同一個原生送出介面，但須明確繞過轉換；切換預覽不得覆蓋使用者編輯。",
+        "follow-up 等其他送出快捷鍵目前不受兩階段保護，可能直接送出未轉換草稿；圖中的確認閘門只涵蓋既有一般 Enter 路徑。附件內容不轉換，引用的後續處理由 Pi 負責。"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "共用核心｜只處理文字與策略",
+      "items": [
+        "建議介面：文字＋方向＋風格／詞庫 → 轉換結果、是否變動或錯誤。內部分成保護片段辨識、OpenCC 轉換、原位還原；不讀 editor、不檢查引用檔案、不連模型、不保存 session。",
+        "既有輸入是台灣用詞轉大陸用詞；code、Markdown 連結目標、圖片引用、URL、HTML 與 @引用盡量保留，連結顯示文字仍轉換。@引用沿用 Pi 的雙引號語法，裸路徑不保證安全；需要保護的技術字串可用 inline code。",
+        "待實作：回覆轉繁體、自訂詞庫、固定技術詞與轉換風格。設定由單一入口注入，不讓各個 UI 各自保存規則；詞庫與語法保護的優先序、繁體風格及衝突案例需在實作時明確定義。"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "回覆端｜原文是來源，繁體是投影",
+      "items": [
+        "Pi 原生執行層與原文訊息節點表示同一平台的兩種責任：處理模型請求，以及持有原文／上下文；不是新增兩個外部服務或資料庫。模型與 agent 內部 tool loop 在此由 Pi 統一代表。",
+        "待實作的顯示投影層只讀取回覆與 Pi 已提供的可見 thinking。建議逐批緩衝並辨識安全段落，再呼叫共用核心；T8 處理剩餘尾段，T9 在原文與整段繁體投影間切換。",
+        "三份狀態分開：輸入端持有可編輯草稿、Pi 持有模型原文與上下文、顯示端持有可丟棄的繁體投影。沒有從投影回寫 Pi 的箭頭；建議顯示轉換失敗退回原文，不重新請求模型。",
+        "整條繁體顯示路徑仍是規劃；目前回覆由 Pi 原生呈現。實作前需驗證 Pi 是否提供不改原始訊息的串流呈現擴充點；一般 TUI／RPC 的 adapter 與確認語意也需各自驗證，不能直接照搬 Fullscreen。"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "證據範圍與待確認事項",
+      "items": [
+        "這是依 README.md、TODO.md 與對話時序圖提出的目標架構，未讀取專案程式碼或核對 Pi API。節點是建議責任邊界，不是對現有檔案、class 或真實呼叫鏈的宣稱；「既有」只表示 README 描述的行為。",
+        "T3 的無變更轉換 undo 語意需要先釐清：README 說不增加多餘 undo 紀錄，TODO 的 issue 則指出 undo 會撤銷前一次輸入。此問題歸草稿控制器與原生 undo 橋接，不在本圖假設已解決。",
+        "Fullscreen 的 IME、兩次 Enter、steering、undo、貼上、引用、autocomplete、換行、resize、主題、focus 與模式切換仍待人工驗收。真實模型測試可能產生費用與對話記錄；這次沒有執行，也不宣稱完整驗收完成。"
+      ]
+    }
+  ]
+}

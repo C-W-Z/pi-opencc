@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "D:\\Pi\\pi-opencc\\.archify\\architecture-conversation-map-20261016-172130\\candidate.json",
+    "sha256": "328084a7b415660ce4e3a28fa8034189878daa2c96c397b1cfaf24bf43073a31",
+    "bytes": 9810
+  },
+  "artifact": {
+    "path": "D:\\Pi\\pi-opencc\\.archify\\architecture-conversation-map-20261016-172130\\conversation-architecture.html",
+    "sha256": "5f907058086aa706d8fb68f2c0a365a9414331bf2ce2ce87ee01d3e5911b093c",
+    "bytes": 829109
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "D:\\Pi\\pi-opencc\\.archify\\architecture-conversation-map-20261016-172130\\conversation-architecture.finalize.json",
+    "summaryReceipt": "D:\\Pi\\pi-opencc\\.archify\\architecture-conversation-map-20261016-172130\\conversation-architecture.finalize-summary.json",
+    "browserCheckReceipt": "D:\\Pi\\pi-opencc\\.archify\\architecture-conversation-map-20261016-172130\\conversation-architecture.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.1.0",
+    "availableVersion": "3.1.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-16T08:26:30.663Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 3553
+}

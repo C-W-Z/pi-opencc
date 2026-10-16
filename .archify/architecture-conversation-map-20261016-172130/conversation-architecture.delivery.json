@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "7db424ce-36ca-487c-b1c3-1cdb1e1868bb",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "D:\\Pi\\pi-opencc\\.archify\\architecture-conversation-map-20261016-172130\\candidate.json",
+  "output": "D:\\Pi\\pi-opencc\\.archify\\architecture-conversation-map-20261016-172130\\conversation-architecture.html",
+  "specification": {
+    "sha256": "e808539ff841ec672b482a1633d68fea6ce6735bb899e37a554e4d1adae711fd",
+    "bytes": 11273
+  },
+  "artifact": {
+    "sha256": "440f50ad45ef6774746829f15947e23c0518718194cc47112dde863b497fedb4",
+    "bytes": 829337
+  }
+}
