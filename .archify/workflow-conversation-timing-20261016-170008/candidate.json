@@ -1,0 +1,896 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "pi-opencc｜一次對話的時間順序 × 元件生效時點",
+    "locale": "zh-TW",
+    "quality_profile": "showcase",
+    "output": ".archify/workflow-conversation-timing-20261016-170008/conversation-timing.html",
+    "repository": {
+      "url": "https://github.com/C-W-Z/pi-opencc",
+      "revision": "e910aeb1158afaecbffcf6e026e770659b323175",
+      "link_mode": "local-only"
+    }
+  },
+  "lanes": [
+    {
+      "id": "conversation",
+      "label": "時間向下；右側同一列表示在該時點生效的元件"
+    }
+  ],
+  "phases": [
+    {
+      "id": "time",
+      "label": "左｜對話時間順序 ↓",
+      "fromCol": 0,
+      "toCol": 0
+    },
+    {
+      "id": "adapter",
+      "label": "右｜輸入整合層",
+      "fromCol": 1,
+      "toCol": 1
+    },
+    {
+      "id": "draft",
+      "label": "草稿控制器",
+      "fromCol": 2,
+      "toCol": 2
+    },
+    {
+      "id": "core",
+      "label": "文字轉換核心",
+      "fromCol": 3,
+      "toCol": 3
+    },
+    {
+      "id": "pi",
+      "label": "Pi／模型執行",
+      "fromCol": 4,
+      "toCol": 4
+    },
+    {
+      "id": "display",
+      "label": "回覆顯示投影",
+      "fromCol": 5,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "t0",
+    "t1",
+    "t2",
+    "t3",
+    "t4",
+    "t5",
+    "t6",
+    "t7",
+    "t8",
+    "t9"
+  ],
+  "nodes": [
+    {
+      "id": "t0",
+      "lane": "conversation",
+      "col": 0,
+      "type": "external",
+      "label": "T0｜開啟輸入介面",
+      "sublabel": "先確認是否能啟用 pi-opencc",
+      "width": 238,
+      "height": 76,
+      "yOffset": -630,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 24,
+          "end_line": 27
+        },
+        {
+          "path": "README.md",
+          "line": 78,
+          "end_line": 78
+        }
+      ]
+    },
+    {
+      "id": "adapter-init",
+      "lane": "conversation",
+      "col": 1,
+      "type": "frontend",
+      "label": "模式／衝突偵測",
+      "tag": "既有",
+      "width": 140,
+      "height": 76,
+      "yOffset": -630,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 24,
+          "end_line": 27
+        },
+        {
+          "path": "README.md",
+          "line": 45,
+          "end_line": 45
+        },
+        {
+          "path": "README.md",
+          "line": 78,
+          "end_line": 78
+        }
+      ],
+      "sublabel": "既有"
+    },
+    {
+      "id": "t1",
+      "lane": "conversation",
+      "col": 0,
+      "type": "external",
+      "label": "T1｜User 撰寫草稿",
+      "sublabel": "輸入繁體、貼上文字或加入引用",
+      "width": 238,
+      "height": 76,
+      "yOffset": -490,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 41,
+          "end_line": 43
+        },
+        {
+          "path": "README.md",
+          "line": 59,
+          "end_line": 68
+        }
+      ]
+    },
+    {
+      "id": "adapter-edit",
+      "lane": "conversation",
+      "col": 1,
+      "type": "frontend",
+      "label": "原生編輯操作",
+      "tag": "既有",
+      "width": 140,
+      "height": 76,
+      "yOffset": -490,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 51,
+          "end_line": 53
+        },
+        {
+          "path": "README.md",
+          "line": 74,
+          "end_line": 77
+        }
+      ],
+      "sublabel": "既有"
+    },
+    {
+      "id": "draft-edit",
+      "lane": "conversation",
+      "col": 2,
+      "type": "backend",
+      "label": "維護草稿階段",
+      "tag": "既有行為",
+      "width": 140,
+      "height": 76,
+      "yOffset": -490,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 41,
+          "end_line": 53
+        }
+      ],
+      "sublabel": "既有行為"
+    },
+    {
+      "id": "t2",
+      "lane": "conversation",
+      "col": 0,
+      "type": "backend",
+      "label": "T2｜第一次 Enter",
+      "sublabel": "只轉換並預覽；不送出",
+      "width": 238,
+      "height": 76,
+      "yOffset": -350,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 41,
+          "end_line": 47
+        },
+        {
+          "path": "README.md",
+          "line": 70,
+          "end_line": 70
+        }
+      ]
+    },
+    {
+      "id": "adapter-enter-one",
+      "lane": "conversation",
+      "col": 1,
+      "type": "frontend",
+      "label": "辨識一般 Enter",
+      "tag": "既有",
+      "width": 140,
+      "height": 76,
+      "yOffset": -350,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 74,
+          "end_line": 76
+        }
+      ],
+      "sublabel": "既有"
+    },
+    {
+      "id": "draft-preview",
+      "lane": "conversation",
+      "col": 2,
+      "type": "backend",
+      "label": "進入確認階段",
+      "tag": "既有",
+      "width": 140,
+      "height": 76,
+      "yOffset": -350,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 41,
+          "end_line": 53
+        }
+      ],
+      "sublabel": "既有"
+    },
+    {
+      "id": "core-input",
+      "lane": "conversation",
+      "col": 3,
+      "type": "security",
+      "label": "保護片段、轉簡",
+      "tag": "既有／擴充規劃",
+      "width": 140,
+      "height": 76,
+      "yOffset": -350,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 47,
+          "end_line": 47
+        },
+        {
+          "path": "README.md",
+          "line": 55,
+          "end_line": 70
+        },
+        {
+          "path": "TODO.md",
+          "line": 17,
+          "end_line": 19
+        }
+      ],
+      "sublabel": "既有／擴充規劃"
+    },
+    {
+      "id": "t3",
+      "lane": "conversation",
+      "col": 0,
+      "type": "external",
+      "label": "T3｜檢查、修改或 Undo",
+      "sublabel": "使用者確認送出內容",
+      "width": 238,
+      "height": 76,
+      "yOffset": -210,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 49,
+          "end_line": 53
+        },
+        {
+          "path": "TODO.md",
+          "line": 14,
+          "end_line": 14
+        }
+      ]
+    },
+    {
+      "id": "adapter-undo",
+      "lane": "conversation",
+      "col": 1,
+      "type": "frontend",
+      "label": "原生編輯／undo",
+      "tag": "既有",
+      "width": 140,
+      "height": 76,
+      "yOffset": -210,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 51,
+          "end_line": 53
+        }
+      ],
+      "sublabel": "既有"
+    },
+    {
+      "id": "draft-confirm",
+      "lane": "conversation",
+      "col": 2,
+      "type": "backend",
+      "label": "確認與原稿管理",
+      "tag": "既有／預覽規劃",
+      "width": 140,
+      "height": 76,
+      "yOffset": -210,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 51,
+          "end_line": 53
+        },
+        {
+          "path": "TODO.md",
+          "line": 13,
+          "end_line": 14
+        }
+      ],
+      "sublabel": "既有／預覽規劃"
+    },
+    {
+      "id": "t4",
+      "lane": "conversation",
+      "col": 0,
+      "type": "backend",
+      "label": "T4｜第二次 Enter",
+      "sublabel": "確認後原樣送出；不再轉換",
+      "width": 238,
+      "height": 76,
+      "yOffset": -70,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 41,
+          "end_line": 43
+        },
+        {
+          "path": "README.md",
+          "line": 51,
+          "end_line": 51
+        }
+      ]
+    },
+    {
+      "id": "draft-submit",
+      "lane": "conversation",
+      "col": 2,
+      "type": "backend",
+      "label": "確認送出閘門",
+      "tag": "既有",
+      "width": 140,
+      "height": 76,
+      "yOffset": -70,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 47,
+          "end_line": 53
+        }
+      ],
+      "sublabel": "既有"
+    },
+    {
+      "id": "pi-submit",
+      "lane": "conversation",
+      "col": 4,
+      "type": "external",
+      "label": "原生送出",
+      "tag": "Pi 原生",
+      "width": 140,
+      "height": 76,
+      "yOffset": -70,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 41,
+          "end_line": 43
+        },
+        {
+          "path": "TODO.md",
+          "line": 5,
+          "end_line": 5
+        }
+      ],
+      "sublabel": "Pi 原生"
+    },
+    {
+      "id": "t5",
+      "lane": "conversation",
+      "col": 0,
+      "type": "backend",
+      "label": "T5｜Pi 向模型送出",
+      "sublabel": "引用、附件與上下文由 Pi 處理",
+      "width": 238,
+      "height": 76,
+      "yOffset": 70,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 66,
+          "end_line": 78
+        },
+        {
+          "path": "TODO.md",
+          "line": 9,
+          "end_line": 9
+        }
+      ]
+    },
+    {
+      "id": "pi-request",
+      "lane": "conversation",
+      "col": 4,
+      "type": "external",
+      "label": "模型請求／上下文",
+      "tag": "Pi 原生責任",
+      "width": 140,
+      "height": 76,
+      "yOffset": 70,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 66,
+          "end_line": 77
+        },
+        {
+          "path": "TODO.md",
+          "line": 9,
+          "end_line": 9
+        },
+        {
+          "path": "TODO.md",
+          "line": 15,
+          "end_line": 15
+        }
+      ],
+      "sublabel": "Pi 原生責任"
+    },
+    {
+      "id": "t6",
+      "lane": "conversation",
+      "col": 0,
+      "type": "backend",
+      "label": "T6｜模型開始回覆",
+      "sublabel": "回覆及可見 thinking 的原文串流",
+      "width": 238,
+      "height": 76,
+      "yOffset": 210,
+      "sources": [
+        {
+          "path": "TODO.md",
+          "line": 15,
+          "end_line": 16
+        }
+      ]
+    },
+    {
+      "id": "pi-response",
+      "lane": "conversation",
+      "col": 4,
+      "type": "external",
+      "label": "接收模型原文",
+      "tag": "Pi 原生責任",
+      "width": 140,
+      "height": 76,
+      "yOffset": 210,
+      "sources": [
+        {
+          "path": "TODO.md",
+          "line": 15,
+          "end_line": 16
+        }
+      ],
+      "sublabel": "Pi 原生責任"
+    },
+    {
+      "id": "t7",
+      "lane": "conversation",
+      "col": 0,
+      "type": "backend",
+      "label": "T7｜每批 Chunk 呈現",
+      "sublabel": "串流期間重複；轉繁體屬規劃",
+      "width": 238,
+      "height": 76,
+      "yOffset": 350,
+      "sources": [
+        {
+          "path": "TODO.md",
+          "line": 15,
+          "end_line": 15
+        }
+      ]
+    },
+    {
+      "id": "core-output",
+      "lane": "conversation",
+      "col": 3,
+      "type": "security",
+      "label": "安全轉繁體",
+      "tag": "待實作",
+      "width": 140,
+      "height": 76,
+      "yOffset": 350,
+      "sources": [
+        {
+          "path": "TODO.md",
+          "line": 15,
+          "end_line": 19
+        }
+      ],
+      "sublabel": "待實作"
+    },
+    {
+      "id": "display-stream",
+      "lane": "conversation",
+      "col": 5,
+      "type": "frontend",
+      "label": "緩衝／顯示投影",
+      "tag": "待實作",
+      "width": 140,
+      "height": 76,
+      "yOffset": 350,
+      "sources": [
+        {
+          "path": "TODO.md",
+          "line": 15,
+          "end_line": 16
+        }
+      ],
+      "sublabel": "待實作"
+    },
+    {
+      "id": "t8",
+      "lane": "conversation",
+      "col": 0,
+      "type": "backend",
+      "label": "T8｜模型回覆完成",
+      "sublabel": "結束串流並保留完整模型原文",
+      "width": 238,
+      "height": 76,
+      "yOffset": 490,
+      "sources": [
+        {
+          "path": "TODO.md",
+          "line": 15,
+          "end_line": 16
+        }
+      ]
+    },
+    {
+      "id": "core-flush",
+      "lane": "conversation",
+      "col": 3,
+      "type": "security",
+      "label": "完成尾段轉換",
+      "tag": "建議設計",
+      "width": 140,
+      "height": 76,
+      "yOffset": 490,
+      "sources": [
+        {
+          "path": "TODO.md",
+          "line": 15,
+          "end_line": 15
+        }
+      ],
+      "sublabel": "建議設計"
+    },
+    {
+      "id": "pi-preserve",
+      "lane": "conversation",
+      "col": 4,
+      "type": "external",
+      "label": "保留原文上下文",
+      "tag": "規劃約束",
+      "width": 140,
+      "height": 76,
+      "yOffset": 490,
+      "sources": [
+        {
+          "path": "TODO.md",
+          "line": 15,
+          "end_line": 15
+        }
+      ],
+      "sublabel": "規劃約束"
+    },
+    {
+      "id": "display-finish",
+      "lane": "conversation",
+      "col": 5,
+      "type": "frontend",
+      "label": "完成整段投影",
+      "tag": "待實作",
+      "width": 140,
+      "height": 76,
+      "yOffset": 490,
+      "sources": [
+        {
+          "path": "TODO.md",
+          "line": 15,
+          "end_line": 16
+        }
+      ],
+      "sublabel": "待實作"
+    },
+    {
+      "id": "t9",
+      "lane": "conversation",
+      "col": 0,
+      "type": "external",
+      "label": "T9｜User 閱讀回覆",
+      "sublabel": "原文／繁體切換只改畫面",
+      "width": 238,
+      "height": 76,
+      "yOffset": 630,
+      "sources": [
+        {
+          "path": "TODO.md",
+          "line": 15,
+          "end_line": 16
+        }
+      ]
+    },
+    {
+      "id": "display-toggle",
+      "lane": "conversation",
+      "col": 5,
+      "type": "frontend",
+      "label": "切換原文／繁體",
+      "tag": "待實作",
+      "width": 140,
+      "height": 76,
+      "yOffset": 630,
+      "sources": [
+        {
+          "path": "TODO.md",
+          "line": 15,
+          "end_line": 16
+        }
+      ],
+      "sublabel": "待實作"
+    }
+  ],
+  "edges": [
+    {
+      "id": "map-0-0",
+      "from": "t0",
+      "to": "adapter-init",
+      "variant": "dashed",
+      "label": "作用對照"
+    },
+    {
+      "id": "map-1-0",
+      "from": "t1",
+      "to": "adapter-edit",
+      "variant": "dashed",
+      "label": "作用對照"
+    },
+    {
+      "id": "map-1-1",
+      "from": "adapter-edit",
+      "to": "draft-edit",
+      "variant": "dashed"
+    },
+    {
+      "id": "time-0-1",
+      "from": "t0",
+      "to": "t1",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "map-2-0",
+      "from": "t2",
+      "to": "adapter-enter-one",
+      "variant": "dashed",
+      "label": "作用對照"
+    },
+    {
+      "id": "map-2-1",
+      "from": "adapter-enter-one",
+      "to": "draft-preview",
+      "variant": "dashed"
+    },
+    {
+      "id": "map-2-2",
+      "from": "draft-preview",
+      "to": "core-input",
+      "variant": "dashed"
+    },
+    {
+      "id": "time-1-2",
+      "from": "t1",
+      "to": "t2",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "map-3-0",
+      "from": "t3",
+      "to": "adapter-undo",
+      "variant": "dashed",
+      "label": "作用對照"
+    },
+    {
+      "id": "map-3-1",
+      "from": "adapter-undo",
+      "to": "draft-confirm",
+      "variant": "dashed"
+    },
+    {
+      "id": "time-2-3",
+      "from": "t2",
+      "to": "t3",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "map-4-0",
+      "from": "t4",
+      "to": "draft-submit",
+      "variant": "dashed",
+      "label": "作用對照"
+    },
+    {
+      "id": "map-4-1",
+      "from": "draft-submit",
+      "to": "pi-submit",
+      "variant": "dashed"
+    },
+    {
+      "id": "time-3-4",
+      "from": "t3",
+      "to": "t4",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "map-5-0",
+      "from": "t5",
+      "to": "pi-request",
+      "variant": "dashed",
+      "label": "作用對照"
+    },
+    {
+      "id": "time-4-5",
+      "from": "t4",
+      "to": "t5",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "map-6-0",
+      "from": "t6",
+      "to": "pi-response",
+      "variant": "dashed",
+      "label": "作用對照"
+    },
+    {
+      "id": "time-5-6",
+      "from": "t5",
+      "to": "t6",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "map-7-0",
+      "from": "t7",
+      "to": "core-output",
+      "variant": "dashed",
+      "label": "作用對照"
+    },
+    {
+      "id": "map-7-1",
+      "from": "core-output",
+      "to": "display-stream",
+      "variant": "dashed"
+    },
+    {
+      "id": "time-6-7",
+      "from": "t6",
+      "to": "t7",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "map-8-0",
+      "from": "t8",
+      "to": "core-flush",
+      "variant": "dashed",
+      "label": "作用對照"
+    },
+    {
+      "id": "map-8-1",
+      "from": "core-flush",
+      "to": "pi-preserve",
+      "variant": "dashed"
+    },
+    {
+      "id": "map-8-2",
+      "from": "pi-preserve",
+      "to": "display-finish",
+      "variant": "dashed"
+    },
+    {
+      "id": "time-7-8",
+      "from": "t7",
+      "to": "t8",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "map-9-0",
+      "from": "t9",
+      "to": "display-toggle",
+      "variant": "dashed",
+      "label": "作用對照"
+    },
+    {
+      "id": "time-8-9",
+      "from": "t8",
+      "to": "t9",
+      "variant": "emphasis",
+      "role": "main"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "如何閱讀這張時間圖",
+      "items": [
+        "左側由 T0 向 T9 閱讀，表示一次正常 user–agent 對話的事件先後；等距排列不是實測耗時。T0 是互動啟用前提，T1 才是本次草稿開始。",
+        "右側依元件分欄，同一橫列只表示該元件在該時點負責的工作。水平虛線是作用對照，不是資料流、呼叫順序或新的執行依賴；空白格表示本圖未安排轉換責任，不代表元件不存在。",
+        "「既有」依 README 描述；「待實作」依 TODO。「建議設計」是規劃中的分工，而非目前程式碼。只讀 README.md 與 TODO.md，未檢視程式碼或核對 Pi API。"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "輸入時序｜T0–T5",
+      "items": [
+        "T0：目前僅啟用互動 Fullscreen，需 Node.js ≥ 22.19.0、Pi ≥ 1.2.0；已偵測 custom editor 衝突就停用。可設定快捷鍵、風格與其他模式 adapter 尚待實作。",
+        "T1–T2：僅非空的一般草稿走兩階段。第一次 Enter 轉換安全片段並原位預覽，不送出；轉換結果相同也要確認，但不增加多餘 undo。轉換失敗保留草稿且不送出。",
+        "T2 的核心保護 code、連結目標、圖片引用、URL、HTML 與 @引用；一般連結顯示文字仍轉換。引用保護不檢查檔案，裸路徑仍可能轉換。自訂詞庫與技術詞保護是此階段的擴充規劃。",
+        "T3：既有修改與 Pi undo 保持原生；確實轉換後若完全恢復原稿，下一次 Enter 重新轉換。原文／簡體預覽切換與原文送出快捷鍵待實作，須定義切換後的編輯保留方式與 terminal protocol 支援。",
+        "T4–T5：第二次 Enter 原樣委派 Pi，不再呼叫轉換核心。Pi 處理送出、引用與附件，本套件不自行建立模型送出通道。"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "回覆時序｜T6–T9",
+      "items": [
+        "現況由 Pi 顯示模型回覆；T7–T9 的繁體投影與原文切換是目標能力，不是已完成的串流攔截。",
+        "T6 接收原文後，T7 隨 chunk 反覆發生，直到 T8 結束。建議顯示投影層緩衝尚未閉合的詞組、code fence 與 Markdown，透過同一純文字核心處理；不是每個 token 到達就立刻轉換。",
+        "T8 的尾段轉換與完整投影是建議的收尾方式；T9 整段切換只選擇原文或繁體畫面，不重新請求模型、不改模型原文與上下文。只處理 Pi 已提供的可見 thinking。",
+        "Pi 持有的原文是唯一來源，顯示層持有可丟棄的投影。建議顯示轉換失敗時退回原文。串流呈現擴充點、對其他 renderer 的相容性與其他模式介面，仍須實作前驗證。"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "主流程之外的分支與驗收",
+      "items": [
+        "這張圖聚焦一次正常文字對話，沒有展開 agent 的 tool loop、多輪對話、錯誤重試與所有按鍵分支；T6–T8 可包含多個 chunk，不把一次 agent 回覆假設為單一 token 或單一畫面更新。",
+        "/ 命令、!／!!、autocomplete 確認、Shift+Enter 與換行走 Pi 原生路徑，不照 T2–T4 轉換；附件不轉換。follow-up 等其他送出快捷鍵目前可能直接送出未轉換草稿，未受此圖的確認閘門完整保護。",
+        "一般 TUI、print、JSON、RPC 目前不啟用。TODO 規劃一般 TUI、RPC；RPC 的確認語意需另定義，不直接照搬 Fullscreen 的兩次 Enter。",
+        "TODO 的 Fullscreen IME、steering、undo、貼上、引用、autocomplete、換行、resize、主題、focus 與模式切換仍待人工驗收。真實模型測試會有費用與對話記錄風險；這次沒有執行。",
+        "建議先完成既有輸入驗收，再做原文快捷鍵／預覽與設定／詞庫，接著實作回覆投影與整段切換，最後逐模式驗收；圖中的所有規劃能力都不代表目前已通過驗收。"
+      ]
+    }
+  ]
+}

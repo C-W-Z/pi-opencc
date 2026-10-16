@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "workflow",
+  "quality": "showcase",
+  "specification": {
+    "path": "D:\\Pi\\pi-opencc\\.archify\\workflow-conversation-timing-20261016-170008\\candidate.json",
+    "sha256": "63df0cbd201588849cd4a13f3bdcac9778f65f65b59c639a27fe7ada5d66fe52",
+    "bytes": 20977
+  },
+  "artifact": {
+    "path": "D:\\Pi\\pi-opencc\\.archify\\workflow-conversation-timing-20261016-170008\\conversation-timing.html",
+    "sha256": "060efc9f010d105f06115fbf1fdd820b2209a6538a5b0ba6e5eab6117ba7cfa2",
+    "bytes": 864141
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "D:\\Pi\\pi-opencc\\.archify\\workflow-conversation-timing-20261016-170008\\conversation-timing.finalize.json",
+    "summaryReceipt": "D:\\Pi\\pi-opencc\\.archify\\workflow-conversation-timing-20261016-170008\\conversation-timing.finalize-summary.json",
+    "browserCheckReceipt": "D:\\Pi\\pi-opencc\\.archify\\workflow-conversation-timing-20261016-170008\\conversation-timing.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.1.0",
+    "availableVersion": "3.1.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-16T08:26:30.663Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 3424
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "04fae44d-7449-45f2-80b9-c5a10fa50e54",
+  "status": "current",
+  "command": "deliver",
+  "type": "workflow",
+  "input": "D:\\Pi\\pi-opencc\\.archify\\workflow-conversation-timing-20261016-170008\\candidate.json",
+  "output": "D:\\Pi\\pi-opencc\\.archify\\workflow-conversation-timing-20261016-170008\\conversation-timing.html",
+  "specification": {
+    "sha256": "5c2cd011b2c83183662d7126ff270ca8585b7b8db8d479b04ae9c0b9683dc55e",
+    "bytes": 21562
+  },
+  "artifact": {
+    "sha256": "7f5d71500236113e79eed65ed63f567f727ea80c611a9d501bfbb834a4f0010d",
+    "bytes": 867908
+  }
+}
